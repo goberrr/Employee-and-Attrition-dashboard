@@ -7,4 +7,5 @@ dash-renderer==1.9.1
 dash-table==5.0.0
 pandas==1.5.1
 plotly==5.10.0
+statsmodels
 werkzeug==2.0.1
