@@ -21,7 +21,7 @@ app = dash.Dash(
     name = 'Employee Data'
 )
 
-app.title = 'Employee Data Dashboard Analytics'
+app.title = 'Employee Attrition Data Dashboard Analytics'
 
 # Navbar
 
@@ -39,7 +39,7 @@ navbar = dbc.NavbarSimple(
             label="More",
         ),
     ],
-    brand="Employee Data Dashboard",
+    brand="Employee Attrition Data Dashboard",
     brand_href="#",
     color="#C00000",
     dark=True,
