@@ -48,22 +48,23 @@ navbar = dbc.NavbarSimple(
 # IMPORT DATA EA
 
 ea = pd.read_csv('HR Employee Attrition.csv')
-
+ubahcat = ['PerformanceRating', 'JobSatisfaction', 'EnvironmentSatisfaction', 'RelationshipSatisfaction']
+ea[ubahcat] = ea[ubahcat].astype('category')
 agecat = []
 for i in ea['Age']:
     if i<20:
-        agecat.append('< 20')
+        agecat.append('a. < 20')
     elif i>=20:
         if i<30:
-            agecat.append('20 - 30')
+            agecat.append('b. 20 - 30')
         elif i>=30:
             if i<40:
-                agecat.append('30 - 40')
+                agecat.append('c. 30 - 40')
             elif i>=40:
                 if i<50:
-                    agecat.append('40 - 50')
+                    agecat.append('d. 40 - 50')
                 elif i>=50:
-                    agecat.append('> 50')
+                    agecat.append('e. > 50')
 
 ea['RangeAge']=agecat
 
@@ -297,7 +298,7 @@ app.layout = html.Div(children=[
                 [
                     html.Br(),
                     dbc.Card([
-                        dbc.CardHeader('Select Country'),
+                        dbc.CardHeader('Select Department'),
                         dbc.CardBody(
                             dcc.Dropdown(
                                 id='choose_dept',
@@ -438,7 +439,7 @@ def update_CardATS(dept_name):
     ats = [
         dbc.CardHeader('Attrition', style={"color":"black"}),
         dbc.CardBody([
-            html.H1(f"{round((((ea_card[ea_card['Attrition']=='Yes'].shape[0])/(ea_card.shape[0]))*100),2)} %")
+            html.H1(f"{round((((ea_card[ea_card['Attrition']=='Yes'].shape[0])/(ea_card.shape[0]))*100),2)}%")
         ]),
     ]
     return ats
@@ -459,6 +460,9 @@ def update_PieGender(dept_name):
             values='EmployeeCount',
             names='Gender',
             color_discrete_sequence=['#C00000', '#FF8181'],
+            labels={
+                'EmployeeCount':'Headcount'
+            },
             template='ggplot2',
             title='by Gender',
             )
